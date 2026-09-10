@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { useTaskStream } from './useTaskStream';
+import { useTaskStream } from '../../hooks/useTaskStream';
 
 const STORAGE_KEY = 'daymark.tasks.v1';
 

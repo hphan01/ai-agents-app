@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
-import { TaskApp } from './TaskApp';
+import { TaskApp } from '../../components/TaskApp';
 
 describe('TaskApp', () => {
   it('shows the empty state and disables clearing when there are no completed tasks', () => {
