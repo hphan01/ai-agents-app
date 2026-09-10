@@ -1,0 +1,21 @@
+# Dependencies
+**/node_modules/
+
+# Build output
+**/dist/
+
+# TypeScript incremental and emitted build metadata
+**/*.tsbuildinfo
+
+# TypeScript project-reference output from the Vite config
+/agent-webapp/vite.config.js
+/agent-webapp/vite.config.d.ts
+
+# Vite and other local tooling output
+.vite/
+**/.vite-temp/
+
+# Local environment files
+.env
+.env.*
+!.env.example
