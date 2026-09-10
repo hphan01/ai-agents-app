@@ -27,7 +27,7 @@ This workspace contains a completed task-list web application built with React, 
 ```text
 .
 ├── .github/
-│   └── chat-modes/
+│   └── agents/
 ├── agent-webapp/
 │   ├── src/
 │   │   ├── components/
