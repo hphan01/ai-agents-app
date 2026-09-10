@@ -22,6 +22,7 @@ Vite will print the local development URL.
 
 - `npm run dev` starts the Vite development server.
 - `npm run build` runs the strict TypeScript build and creates a production bundle.
+- `npm test` runs the Vitest and React Testing Library suite.
 - `npm run preview` serves the production bundle locally.
 
 ## Structure
@@ -33,6 +34,8 @@ Vite will print the local development URL.
 - `src/components/TaskList.tsx` renders task rows and empty states.
 - `src/main.tsx` mounts the React application.
 - `src/styles.css` contains the responsive visual styling.
+- `src/components/TaskApp.test.tsx` covers end-to-end task interactions.
+- `src/hooks/useTaskStream.test.ts` covers state, filtering, persistence, and storage failures.
 
 ## Persistence
 

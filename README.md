@@ -57,8 +57,14 @@ To create a production build:
 npm run build
 ```
 
-The production build has been validated successfully with TypeScript and Vite.
+To run the automated test suite:
+
+```bash
+npm test
+```
+
+The production build has been validated successfully with TypeScript and Vite, and the Vitest suite covers task interaction and storage behavior.
 
 ## Notes
 
-Tasks are stored locally in the browser under the `daymark.tasks.v1` key. No backend or account system is included. There is currently no automated test suite or ESLint configuration; the production build is the current executable validation step.
+Tasks are stored locally in the browser under the `daymark.tasks.v1` key. No backend or account system is included. The app includes automated tests for task workflows, filtering, persistence, and storage failure handling.
