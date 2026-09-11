@@ -3,8 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f6f3ee" />
+    <meta id="theme-color" name="theme-color" content="#f6f3ee" />
     <title>Daymark Tasks</title>
+    <script>
+      try {
+        const scheme = window.localStorage.getItem('daymark-color-scheme') === 'dark' ? 'dark' : 'light';
+        document.documentElement.dataset.theme = scheme;
+        document.getElementById('theme-color').setAttribute('content', scheme === 'dark' ? '#17191a' : '#f6f3ee');
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

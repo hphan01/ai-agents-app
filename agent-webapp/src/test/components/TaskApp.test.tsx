@@ -1,9 +1,55 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { TaskApp } from '../../components/TaskApp';
 
 describe('TaskApp', () => {
+  it('provides an accessible color scheme toggle', async () => {
+    const user = userEvent.setup();
+    render(<TaskApp />);
+    const toggle = screen.getByRole('button', { name: 'Switch to dark mode' });
+
+    expect(toggle).toHaveAttribute('aria-pressed', 'false');
+    expect(document.documentElement).toHaveAttribute('data-theme', 'light');
+
+    await user.click(toggle);
+
+    expect(screen.getByRole('button', { name: 'Switch to light mode' })).toHaveAttribute('aria-pressed', 'true');
+    expect(document.documentElement).toHaveAttribute('data-theme', 'dark');
+  });
+
+  it('restores the saved scheme and persists switching back to light mode', async () => {
+    window.localStorage.setItem('daymark-color-scheme', 'dark');
+    const user = userEvent.setup();
+    const { unmount } = render(<TaskApp />);
+
+    expect(screen.getByRole('button', { name: 'Switch to light mode' })).toHaveAttribute('aria-pressed', 'true');
+    expect(document.documentElement).toHaveAttribute('data-theme', 'dark');
+
+    await user.click(screen.getByRole('button', { name: 'Switch to light mode' }));
+    expect(window.localStorage.getItem('daymark-color-scheme')).toBe('light');
+    expect(document.documentElement).toHaveAttribute('data-theme', 'light');
+
+    unmount();
+    render(<TaskApp />);
+    expect(screen.getByRole('button', { name: 'Switch to dark mode' })).toHaveAttribute('aria-pressed', 'false');
+    expect(document.documentElement).toHaveAttribute('data-theme', 'light');
+  });
+
+  it('keeps the toggle usable when local storage is unavailable', () => {
+    vi.spyOn(window.localStorage, 'getItem').mockImplementation(() => {
+      throw new Error('storage unavailable');
+    });
+    vi.spyOn(window.localStorage, 'setItem').mockImplementation(() => {
+      throw new Error('storage unavailable');
+    });
+
+    render(<TaskApp />);
+
+    expect(screen.getByRole('button', { name: 'Switch to dark mode' })).toBeInTheDocument();
+    expect(document.documentElement).toHaveAttribute('data-theme', 'light');
+  });
+
   it('shows the empty state and disables clearing when there are no completed tasks', () => {
     render(<TaskApp />);
 

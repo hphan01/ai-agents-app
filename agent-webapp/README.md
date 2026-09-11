@@ -1,6 +1,6 @@
 # Agent Webapp
 
-A small React and TypeScript task list application. Tasks can be added, completed, filtered, deleted, and cleared in bulk. Data is persisted in the browser with `localStorage`.
+A small React and TypeScript task list application. Tasks can be added, completed, filtered, deleted, and cleared in bulk. Data is persisted in the browser with `localStorage`. Use the upper-right color scheme toggle to switch between light and dark mode.
 
 ## Requirements
 
@@ -40,3 +40,5 @@ Vite will print the local development URL.
 ## Persistence
 
 Tasks are stored under the `daymark.tasks.v1` local-storage key. Invalid stored entries are ignored. If browser storage is unavailable or full, the current session remains usable in memory, but changes cannot be persisted.
+
+The selected color scheme is stored under the `daymark-color-scheme` local-storage key. The app defaults to light mode when the preference is missing or invalid. If browser storage is unavailable, the toggle remains usable for the current session but the preference cannot be persisted.
