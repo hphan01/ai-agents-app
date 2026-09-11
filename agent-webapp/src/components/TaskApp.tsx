@@ -1,6 +1,7 @@
 import { TaskComposer } from './TaskComposer';
 import { TaskList } from './TaskList';
 import { useTaskStream } from '../hooks/useTaskStream';
+import { useColorScheme } from '../hooks/useColorScheme';
 import type { TaskFilter } from '../types';
 
 const filters: Array<{ label: string; value: TaskFilter }> = [
@@ -11,10 +12,21 @@ const filters: Array<{ label: string; value: TaskFilter }> = [
 
 export function TaskApp() {
   const stream = useTaskStream();
+  const { scheme, toggleScheme } = useColorScheme();
   const hasCompletedTasks = stream.tasks.some(task => task.completed);
+  const nextScheme = scheme === 'light' ? 'dark' : 'light';
 
   return (
     <main className="app-shell">
+      <button
+        className="theme-toggle"
+        type="button"
+        aria-label={`Switch to ${nextScheme} mode`}
+        aria-pressed={scheme === 'dark'}
+        onClick={toggleScheme}
+      >
+        <span aria-hidden="true">{scheme === 'light' ? '☾' : '☀'}</span>
+      </button>
       <header className="intro">
         <p className="eyebrow">A quieter way to plan</p>
         <h1>Daymark</h1>
